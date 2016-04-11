@@ -1,0 +1,10 @@
+d:
+  image: metocean/riemann
+  ports:
+  - "5555:5555"
+  - "5555:5555/udp"
+  - "5556:5556"
+  - "8080:8080"
+  volumes:
+  - "./riemann.config:/etc/riemann/riemann.config:ro"
+  - "./dash-config.json:/etc/riemann/dash-config.json"
