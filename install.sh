@@ -19,16 +19,16 @@ cp /install/riemann.config /etc/riemann/
 mkdir /etc/service/riemann
 cp /install/riemann.sh /etc/service/riemann/run
 
-# Install riemann-dash
-apt-get install -y ruby ruby-dev build-essential
-gem install riemann-client riemann-tools riemann-dash
-cp /install/config.rb /etc/riemann/
-cp /install/dash-config.json /etc/riemann/
-mkdir /etc/service/riemann-dash
-cp /install/riemann-dash.sh /etc/service/riemann-dash/run
+# # Install riemann-dash
+# apt-get install -y ruby ruby-dev build-essential
+# gem install riemann-client riemann-tools riemann-dash
+# cp /install/config.rb /etc/riemann/
+# cp /install/dash-config.json /etc/riemann/
+# mkdir /etc/service/riemann-dash
+# cp /install/riemann-dash.sh /etc/service/riemann-dash/run
 
 # remove everything
-apt-get remove -y curl build-essential ruby-dev
+apt-get remove -y curl
 apt-get autoremove -y
 apt-get clean all
 rm -rf /install /var/lib/apt/lists/* /tmp/* /var/tmp/*
