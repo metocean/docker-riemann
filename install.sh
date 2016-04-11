@@ -1,34 +1,27 @@
 #!/bin/sh
 set -e
 
-# Update & Install
-apt-get update
-apt-get upgrade -y
-apt-get install -y curl default-jre-headless
+apk update
+apk upgrade
 
-# Install runit
-cp -R /install/runit/* /
+# Install real bash
+rm /bin/bash
+apk add bash
 
-# install init.sh
-cp -R /install/initsh/* /
+# Install Java
+apk add openjdk8-jre
 
-# Download the latest .deb and install
-curl https://aphyr.com/riemann/riemann_0.2.10_all.deb > /tmp/riemann_0.2.10_all.deb
-dpkg -i /tmp/riemann_0.2.10_all.deb
+# Install riemann
+wget https://aphyr.com/riemann/riemann-0.2.10.tar.bz2
+tar xvfj riemann-0.2.10.tar.bz2
+cp -R /riemann-0.2.10/* /usr
+rm -rf /riemann-0.2.10
+mkdir /etc/riemann
 cp /install/riemann.config /etc/riemann/
 mkdir /etc/service/riemann
 cp /install/riemann.sh /etc/service/riemann/run
 
-# # Install riemann-dash
-# apt-get install -y ruby ruby-dev build-essential
-# gem install riemann-client riemann-tools riemann-dash
-# cp /install/config.rb /etc/riemann/
-# cp /install/dash-config.json /etc/riemann/
-# mkdir /etc/service/riemann-dash
-# cp /install/riemann-dash.sh /etc/service/riemann-dash/run
-
-# remove everything
-apt-get remove -y curl
-apt-get autoremove -y
-apt-get clean all
-rm -rf /install /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Clean up
+rm -rf /install
+rm -rf /tmp/*
+rm -rf /var/cache/apk/*
