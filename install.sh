@@ -13,9 +13,9 @@ apk add openjdk8-jre
 
 # Install riemann
 wget https://aphyr.com/riemann/riemann-0.2.10.tar.bz2
-tar xvfj riemann-0.2.10.tar.bz2
-cp -R /riemann-0.2.10/* /usr
-rm -rf /riemann-0.2.10
+tar xvfj riemann-$RIEMANN_VERSION.tar.bz2
+cp -R /riemann-$RIEMANN_VERSION/* /usr
+rm -rf /riemann-$RIEMANN_VERSION
 mkdir /etc/riemann
 cp /install/riemann.config /etc/riemann/
 mkdir /etc/service/riemann
